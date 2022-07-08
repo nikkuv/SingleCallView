@@ -1,0 +1,19 @@
+.metaData{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: .5rem 1.5rem;
+    height: 20%;
+    height: 100px;
+    overflow: auto;
+}
+
+.metaDataHeading{
+    font-size: 12px;
+    font-style: bold;
+    font-weight: 500;
+    color: #333;
+}
+
+.metaDataVal{
+    font-size: 12px;
+}

@@ -1,0 +1,28 @@
+.header {
+    height: 10%;
+    background-color: white;
+    box-shadow: 2px 0px 20px #eee;
+    display: grid;
+    grid-gap: 10px;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    padding: .5rem 1.5rem;
+    border-radius: 4px 4px 0 0;
+}
+
+.heading{
+    margin-bottom: 0;
+}
+
+.headerSubHeading{
+    padding-left: .2rem;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.headerContent {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 1rem;
+    place-items: center;
+}

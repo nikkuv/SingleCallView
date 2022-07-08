@@ -1,0 +1,10 @@
+.noteSection{
+    padding: .5rem 1.5rem;
+}
+
+.addNote {
+    display: grid;
+    grid-template-columns: 70% 20%;
+    grid-gap: 10px;
+    padding-bottom: .2rem;
+}

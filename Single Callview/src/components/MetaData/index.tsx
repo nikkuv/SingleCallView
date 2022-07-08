@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './style.module.css';
 
 type metaDataInterface = {
   objectKey: string;
@@ -8,19 +9,19 @@ type metaDataInterface = {
 const metaData: metaDataInterface[] = [
   {
     objectKey: 'Ticket Update ID',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'Contact Type',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'Ticket Form',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'Wrapup Percentage',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'Agent Disposition',
@@ -36,43 +37,43 @@ const metaData: metaDataInterface[] = [
   },
   {
     objectKey: 'Ticket Update ID',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'Phone Number',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'Filename',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'State',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'Public Comment',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'Ticket Channel',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'Wrap Up Length',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'Borrower Account',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'Percent Silence',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'Percent Overtalk ',
-    val: '',
+    val: '-',
   },
   {
     objectKey: 'Call Id',
@@ -82,14 +83,16 @@ const metaData: metaDataInterface[] = [
 
 function SingleCallView() {
   return (
-    <div>
+    <div className={styles.metaData}>
       {metaData
         .filter((i) => i.val)
         .map((item) => {
           return (
             <div key={item.objectKey}>
-              <span>{item.objectKey}</span>
-              <span>{item.val}</span>
+              <span className={styles.metaDataHeading}>
+                {item.objectKey} :{' '}
+              </span>
+              <span className={styles.metaDataVal}>{item.val}</span>
             </div>
           );
         })}

@@ -1,0 +1,22 @@
+.transcriptSection{
+    padding: .5rem 1.5rem;
+}
+
+.transcriptContent {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    width: 100%;
+    grid-auto-flow: column;
+    border: .5px solid #eee;
+    border-radius: 4px;
+}
+
+.eventsection{
+    height: 220px;
+    border-right: 1px solid #eee; 
+}
+
+.events{
+    background-color: #eee;
+    padding: .5rem;
+}
