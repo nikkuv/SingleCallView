@@ -2,9 +2,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: .5rem 1.5rem;
-    height: 20%;
-    height: 100px;
-    overflow: auto;
+    /* height: 100px;
+    overflow: auto; */
 }
 
 .metaDataHeading{
@@ -16,4 +15,10 @@
 
 .metaDataVal{
     font-size: 12px;
+}
+
+.showmoreBtn{
+    display: grid;
+    justify-content: end;
+    margin-right: 1.5rem;
 }

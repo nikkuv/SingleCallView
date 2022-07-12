@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { set, entries, update } from 'idb-keyval';
-import { Input, Checkbox, Button } from 'antd';
+import { Input, Checkbox, Button, Tag } from 'antd';
 const { Search } = Input;
 import styles from './style.module.css';
 
@@ -9,7 +9,8 @@ type tagsObject = {
   accurate: boolean;
   inaccurate: boolean;
   description: string;
-  selected?: boolean;
+  selected: boolean;
+  color: string;
 };
 
 function Tags() {
@@ -19,80 +20,105 @@ function Tags() {
       accurate: false,
       inaccurate: false,
       description: 'some feedback',
+      selected: true,
+      color: 'red',
     },
     {
       name: 'tagsecond',
       accurate: false,
       inaccurate: false,
       description: 'some feedback',
+      selected: false,
+      color: 'blue',
     },
     {
       name: 'tagthird',
       accurate: false,
       inaccurate: false,
       description: 'some feedback',
+      selected: false,
+      color: 'cyan',
     },
     {
       name: 'tagforth',
       accurate: false,
       inaccurate: false,
       description: 'some feedback',
+      selected: false,
+      color: 'red',
     },
     {
       name: 'tagfive',
       accurate: false,
       inaccurate: false,
       description: 'some feedback',
+      selected: false,
+      color: 'purple',
     },
     {
       name: 'tagsix',
       accurate: false,
       inaccurate: false,
       description: 'some feedback',
+      selected: false,
+      color: 'cyan',
     },
     {
       name: 'tagseven',
       accurate: false,
       inaccurate: false,
       description: 'some feedback',
+      selected: false,
+      color: 'orange',
     },
     {
       name: 'tageight',
       accurate: false,
       inaccurate: false,
       description: 'some feedback',
+      selected: false,
+      color: 'purple',
     },
     {
       name: 'tagnine',
       accurate: false,
       inaccurate: false,
       description: 'some feedback',
+      selected: false,
+      color: 'green',
     },
     {
       name: 'tagten',
       accurate: false,
       inaccurate: false,
       description: 'some feedback',
+      selected: false,
+      color: 'red',
     },
   ];
-
-  const [showDropDown, setShowDropdown] = useState<boolean>(false);
-  const [searchItem, setSearchItem] = useState<string>('');
-  const [filteredData, setFilteredData] = useState(tagsArray);
-  const [selectedTags, setselectedTags] = useState<tagsObject[]>([]);
 
   tagsArray.map((item) => {
     set(item.name, item);
   });
 
+  // const checkboxValues = tagsArray.map((item) => item.name);
+
+  const [showDropDown, setShowDropdown] = useState<boolean>(false);
+  const [searchItem, setSearchItem] = useState<string>('');
+  const [filteredData, setFilteredData] = useState<tagsObject[]>(tagsArray);
+  const [dataFromDB, serDataFromDB] = useState<string[]>([]);
+
   const getAllValuesFromDB = () => {
     entries().then((entries) => {
-      const res = entries
+      const res: string[] = entries
         .map((item) => item[1])
-        .filter((item) => item.selected);
-      setselectedTags(res);
+        .filter((item) => item.selected)
+        .map((item) => item.name);
+      serDataFromDB(res);
     });
   };
+
+  const [selectedTags, setselectedTags] = useState<string[]>(dataFromDB);
 
   useEffect(() => {
     if (searchItem !== '') {
@@ -103,6 +129,14 @@ function Tags() {
     } else {
       setFilteredData(tagsArray);
     }
+    // if (searchItem !== '') {
+    //   const data = checkboxValues.filter((item) =>
+    //     item.toLocaleLowerCase().startsWith(searchItem),
+    //   );
+    //   setFilteredData(data);
+    // } else {
+    //   setFilteredData(checkboxValues);
+    // }
   }, [searchItem]);
 
   const addTags = () => {
@@ -114,29 +148,41 @@ function Tags() {
   };
 
   const handleCheckbox = (e: any) => {
-    const res = filteredData.map((item) => {
-      if (item.name === e.target.value) {
-        // update data item in indexDB
-        update(item.name, (val) => ({
-          ...val,
-          selected: true,
-        }));
-        return { ...item, selected: true };
-      } else {
-        return item;
-      }
-    });
+    console.log(e);
   };
+
+  // const handleCheckbox = (e: any) => {
+  //   const res = filteredData.map((item) => {
+  //     if (item.name === e.target.value) {
+  //       // update data item in indexDB
+  //       update(item.name, (val) => ({
+  //         ...val,
+  //         selected: true,
+  //       }));
+  //       return { ...item, selected: true };
+  //     } else {
+  //       return item;
+  //     }
+  //   });
+  // };
 
   return (
     <div className={styles.tagSection}>
-      {selectedTags.length > 0
+      {/* {console.log(selectedTags)} */}
+      {/* {selectedTags.map((item) => (
+        <Tag key={item}>{item}</Tag>
+        // <span className={styles.selectedTags} key={item.name}>
+        //   {item.name}
+        // </span>
+      ))} */}
+      {/* {selectedTags.length > 0
         ? selectedTags.map((item) => (
-            <span className={styles.selectedTags} key={item.name}>
-              {item.name}
-            </span>
+            <Tag key={item}>{item}</Tag>
+            // <span className={styles.selectedTags} key={item.name}>
+            //   {item.name}
+            // </span>
           ))
-        : null}
+        : null} */}
       <Button className={styles.addTagButton} onClick={addTags}>
         Add Tags
       </Button>
@@ -149,19 +195,21 @@ function Tags() {
             onChange={handleSearch}
           />
           <div className={styles.tagsStyles}>
+            {/* <Checkbox.Group
+              options={filteredData}
+              onChange={handleCheckbox}
+              defaultValue={selectedTags}
+            /> */}
             {filteredData.map((item) => {
               return (
                 <div key={item.name}>
-                  <Checkbox onChange={handleCheckbox} value={item.name}>
-                    {item.name}
-                  </Checkbox>
+                  <Checkbox onChange={handleCheckbox}>{item.name}</Checkbox>
                 </div>
               );
             })}
           </div>
-          <Button className={styles.tagsbtn} onClick={getAllValuesFromDB}>
-            Apply
-          </Button>
+          {getAllValuesFromDB()}
+          <Button className={styles.tagsbtn}>Apply</Button>
         </div>
       ) : null}
     </div>

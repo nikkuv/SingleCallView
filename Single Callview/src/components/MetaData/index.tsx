@@ -1,4 +1,5 @@
-import React from 'react';
+import { Button } from 'antd';
+import React, { useState } from 'react';
 import styles from './style.module.css';
 
 type metaDataInterface = {
@@ -34,10 +35,6 @@ const metaData: metaDataInterface[] = [
   {
     objectKey: 'Service Name',
     val: 'Chat Basic Service',
-  },
-  {
-    objectKey: 'Ticket Update ID',
-    val: '-',
   },
   {
     objectKey: 'Phone Number',
@@ -81,23 +78,45 @@ const metaData: metaDataInterface[] = [
   },
 ];
 
-function SingleCallView() {
+const SingleCallView = () => {
+  const [showmore, setShowMore] = useState(false);
+
+  const handleDisplayOfData = () => {
+    setShowMore(!showmore);
+  };
+
   return (
-    <div className={styles.metaData}>
-      {metaData
-        .filter((i) => i.val)
-        .map((item) => {
-          return (
-            <div key={item.objectKey}>
-              <span className={styles.metaDataHeading}>
-                {item.objectKey} :{' '}
-              </span>
-              <span className={styles.metaDataVal}>{item.val}</span>
-            </div>
-          );
-        })}
-    </div>
+    <>
+      <div className={styles.metaData}>
+        {showmore
+          ? metaData.map((item) => {
+              return (
+                <div key={item.objectKey}>
+                  <span className={styles.metaDataHeading}>
+                    {item.objectKey} :{' '}
+                  </span>
+                  <span className={styles.metaDataVal}>{item.val}</span>
+                </div>
+              );
+            })
+          : metaData.slice(0, Math.ceil(metaData.length / 2)).map((item) => {
+              return (
+                <div key={item.objectKey}>
+                  <span className={styles.metaDataHeading}>
+                    {item.objectKey} :{' '}
+                  </span>
+                  <span className={styles.metaDataVal}>{item.val}</span>
+                </div>
+              );
+            })}
+      </div>
+      <div className={styles.showmoreBtn}>
+        <Button onClick={handleDisplayOfData}>
+          {showmore ? 'show less' : 'show more'}
+        </Button>
+      </div>
+    </>
   );
-}
+};
 
 export default SingleCallView;

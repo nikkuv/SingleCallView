@@ -16,7 +16,20 @@
     border-right: 1px solid #eee; 
 }
 
+.eventsectionExpand{
+    height: 100vh;
+}
+
 .events{
     background-color: #eee;
     padding: .5rem;
+}
+
+.expandIcon{
+    cursor: pointer;
+}
+
+.expandIconDiv{
+    display: grid;
+    justify-self: end;
 }

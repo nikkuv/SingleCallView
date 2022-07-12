@@ -7,13 +7,21 @@ import Transcript from './components/Transcript';
 import Note from './components/Note';
 
 function App() {
+  const [expand, setExpand] = useState<boolean>(false);
+
   return (
     <div className="App">
       <div className="container">
         <Header />
-        <SingleCallView />
-        <Tags />
-        <Transcript />
+        {expand ? (
+          <></>
+        ) : (
+          <>
+            <SingleCallView />
+            <Tags />
+          </>
+        )}
+        <Transcript expand={expand} setExpand={() => setExpand(!expand)} />
         <Note />
       </div>
     </div>
