@@ -1,4 +1,5 @@
 .noteSection{
+    margin-top: auto;
     padding: .5rem 1.5rem;
 }
 
@@ -10,8 +11,18 @@
 }
 
 .noteStyle{
+    display: inline-block;
     padding: .5rem;
     border: .5px solid #eee;
     margin: .5rem 0;
     border-radius: 4px;
+    width: 80%;
+}
+
+.noteIcon { 
+    height: 25px;
+    width: 25px;
+    color: #eee;
+    cursor: pointer;
+    padding: .2rem;
 }

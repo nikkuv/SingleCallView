@@ -12,7 +12,7 @@
 }
 
 .eventsection{
-    height: 220px;
+    height: 320px;
     border-right: 1px solid #eee; 
 }
 
@@ -32,4 +32,37 @@
 .expandIconDiv{
     display: grid;
     justify-self: end;
+}
+
+.conversationSection{
+    max-height: 320px;
+    overflow-y: scroll;
+    padding: .5rem;
+}
+
+.transcriptHeading, .transcriptTime{
+    color: #008AF4;
+    font-size: 12px;
+    font-weight: 500;
+    margin: .2rem;
+}
+
+.transcriptTime {
+    color: #9E9EA7;
+}
+
+.violations {
+    background-color: #FEFEFE;
+    display: block;
+    width: 100%;
+    padding: .5rem;
+}
+
+.violations:hover{
+    background-color: #E2F8FF;
+}
+
+.transcriptText {
+    font-size: 12px;
+    margin: .2rem;
 }

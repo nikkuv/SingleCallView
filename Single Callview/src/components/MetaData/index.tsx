@@ -78,8 +78,11 @@ const metaData: metaDataInterface[] = [
   },
 ];
 
-const SingleCallView = () => {
-  const [showmore, setShowMore] = useState(false);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const MetaData = ({ apiData }: any) => {
+  const [showmore, setShowMore] = useState<boolean>(false);
+
+  // console.log('metadata', apiData.metadataList);
 
   const handleDisplayOfData = () => {
     setShowMore(!showmore);
@@ -89,26 +92,28 @@ const SingleCallView = () => {
     <>
       <div className={styles.metaData}>
         {showmore
-          ? metaData.map((item) => {
+          ? apiData.metadataList.map((item: any) => {
               return (
-                <div key={item.objectKey}>
+                <div key={item.title}>
                   <span className={styles.metaDataHeading}>
-                    {item.objectKey} :{' '}
+                    {item.title} :{' '}
                   </span>
-                  <span className={styles.metaDataVal}>{item.val}</span>
+                  <span className={styles.metaDataVal}>{item.value}</span>
                 </div>
               );
             })
-          : metaData.slice(0, Math.ceil(metaData.length / 2)).map((item) => {
-              return (
-                <div key={item.objectKey}>
-                  <span className={styles.metaDataHeading}>
-                    {item.objectKey} :{' '}
-                  </span>
-                  <span className={styles.metaDataVal}>{item.val}</span>
-                </div>
-              );
-            })}
+          : apiData.metadataList
+              ?.slice(0, Math.ceil(apiData.metadataList.length / 2))
+              .map((item: any) => {
+                return (
+                  <div key={item.title}>
+                    <span className={styles.metaDataHeading}>
+                      {item.title} :{' '}
+                    </span>
+                    <span className={styles.metaDataVal}>{item.value}</span>
+                  </div>
+                );
+              })}
       </div>
       <div className={styles.showmoreBtn}>
         <Button onClick={handleDisplayOfData}>
@@ -119,4 +124,4 @@ const SingleCallView = () => {
   );
 };
 
-export default SingleCallView;
+export default MetaData;
